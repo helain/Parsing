@@ -1,3 +1,0 @@
-GET-запрос в Postman: https://api.github.com/users/:user/repos
-:user указание имени пользователя, в данном случае "helain"
-вывод сохранен в файле test.json
