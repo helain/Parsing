@@ -34,8 +34,9 @@ for category_item in category:
         for item in items:
             item_url = f"https://rskrf.ru{item['href']}"
             """получение имени"""
-            item_name = item.string[:-8]
-
+            item_name_full = item.string
+            item_name_full = item_name_full.partition('(')
+            item_name = item_name_full[0]
             response_item = requests.get(item_url).text
             item_soup = BeautifulSoup(response_item, 'lxml')
             ratings = item_soup.select('.rating-item span')
@@ -59,6 +60,6 @@ rskrf_dict = {'Name':name_list,
               'Quality_rating':quality_list,
               'Total_rating':total_score_list}
 
-rskrf_data = pd.DataFrame(rskrf_dict, index=False)
+rskrf_data = pd.DataFrame(rskrf_dict)
 rskrf_data.to_csv('rskrf_result.csv')
 
